@@ -1,0 +1,31 @@
+THE HOTEL PROCESS
+===================================================================
+The hotel process contains the following threads:
+    1- TOURISTS GENERATION THREAD: that generates groups of tourists by the given frequency per time and each group will
+       have its own struct that describes it, and a vector will save each tourist group by their current state (pre-reserved,
+       waiting, in a room).
+
+    2- RECEPTION EMPLOYEE THREADS BY THE NUMBER OF GIVEN EMPLOYEES: in order for each thread to access the coming tourist
+       group, a mutex is locked in order for the reception to hold a tourist group then unlock the mutex as no more than
+       one employee can access the available groups, when an employee captures a group his next job is to reserve a room
+       for them by order, or give them a turn in case of no rooms are available.
+
+    3- BELLBOYS THREADS BY THE NUMBER OF GIVEN BELLBOYS: this threads keeps checking for available bags to send to rooms
+       when the bellboy find a bag it keeps looking for a second bag for the same room in cases if he finds or doesn't find
+       a second bag he'll go to the room that is given to the group who owns the bag or two bags, in order to check the
+       available bags the bellboy will lock a mutex and then releases it after finishes checking or finds two bag, the bellyboy
+        takes a time between the min and max times that are given to him and then a number is generated to see how happy the
+        bellboy is between the max and min numbers for his PSYCHOLOGICAL_STATE if it was above or below the needed psychological
+        state to get tipped, the same thing will be done when taking the luggage back down.
+
+    4- KITCHEN EMPLOYEE THREADS BY THE GIVEN NUMBER: each one of those threads will take a step turn in order to make a
+     meal when a tourist group makes a food order, each step takes a time between the given mix and min times
+
+     5- MAINTENANCE THREADS BY THE GIVEN NUMBER: these threads will keep checking if there is a request for having to fix
+      something when a request is available, the maintenance employee will be absent for a time between the min and max
+      defined time
+
+      6- UNSATISFIED_CHECKER: this thread checks the unsatisfied tourists by checking a shared memory between the hotel
+         process and the tourist groups processes in order to remove a process from the hotel.
+
+
