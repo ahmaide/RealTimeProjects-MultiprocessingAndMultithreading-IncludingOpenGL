@@ -1,0 +1,7 @@
+BUtton: connected on pin2 in port D in order to do an interrupt 
+
+CHECKBUTTON FUNCTION: this function checks if the button is pressed in order to check that the entered password 
+is either right or wrong to print it on the LCD.
+
+LCD: the lcd is set with its pins initialized first with its pins 12, 11, 7, 6,5 and4 , with the message "enter the code" and the cursor on the top
+when the button is pressed its cleared out and the message is displayed on the top line

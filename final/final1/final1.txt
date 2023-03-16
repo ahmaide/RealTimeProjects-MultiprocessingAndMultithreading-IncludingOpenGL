@@ -1,0 +1,26 @@
+The Included Processes
+********************************************
+1- THE REFEREE PROCESS (PARENT PROCESS): this is the parent process that forks the children processes (player1, player2),
+in this process the locations of the ducks are set randomly in an array with size of 125 and puts this array in a shared
+memory so can it be accessed by the players processes, after in initializes the ducks locations it waits 1 second until
+the players are set, then it starts the game when each round it decided which ducks will stand up and sets their state to
+be standing up, it sends a signal to the players that the round has started then it sleeps for 1 second,after that it sets the
+remaining ducks to down and sends a signal that the round is over, it receives the points from the players by two message
+queues one for player 1 and one for player 2 and gives each player a set of points and checks if the thresholds numbers
+were passed, if yes it stops the simulation else it starts a new round.
+
+2- THE PLAYER'S PROCESSES (2 CHILDREN PROCESSES): when a player process is created it will be randomly given an attention
+value viable that decreases by the end of each round and a score variable initially set to 0, each player catches a signal
+that the round started, and starts catching the ducks, when a player catches a duck his points are changed based on the
+given info, and after the round is over the players receive a signal telling that the round is over and each one sends
+his score to the referee by the player's message queue then keeps on waiting for the next round to start
+
+
+communication techniques
+*************************************************
+1- SHARED MEMORY(125 DUCKS): this is a shared memory that contains all the 125 ducks with each one's color and locaton
+and its state (up or down) it is created by the referee and accessed and editable by the players so can everyone gets
+to know the needed information about the ducks.
+
+2- TWO MESSAGE QUEUES(PLAYER SCORE FOR THE ROUND): each player sends his score in this message queue by the end of the
+ round to the referee by the end of each round

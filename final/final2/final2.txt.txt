@@ -1,0 +1,21 @@
+THE LCD: it will be connected on port d as shown in the attached image
+
+THE  KEYPAD: it will be connected on port c as shown in the attached image, for each row each column is checked 
+in order to find which key is pressed on the keypad ( * and # won;t be accepted as each one has its own register
+for approval or disapproval as the system checks the entered string subtracts it from those registers and if the outcome was
+zero in any one of them it gives the error message on the LCD).
+
+THE LED: it will be off at first, the when the program starts it lights up as the door is unlocked.
+
+THE PASSCODE: it will be initialized in the code as 1234, and it will be stored in an array, as each character ofa number takes a place when a used enters the string via the
+keypad it will be displayed on the LCD, each entered number will be multiplied by 10 then added 
+to the next number, until the user presses on the button.
+
+
+BUTTON PRESS: (this will work as an interrupt on RB0) when the button is pressed the system checks if the stored number is equal to the saved
+password by sending the number to W and subtracting it from the password value for each character stored in the array, if W had zero in it, 
+that will mean that the password is correct as the message "safe  is locked" with the led color turns off,
+else if the value wasn't zero the LCD will display "Wrong code!" and restarts the process.
+
+
+
